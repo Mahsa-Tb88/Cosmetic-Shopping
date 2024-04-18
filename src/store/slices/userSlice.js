@@ -1,19 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
-  username: "Mahsa",
-  isLogedIn: false,
+  user: {
+    isLoggedIn: false,
+    isAdmin: false,
+    Username: "",
+    firstname: "",
+    lastname: "",
+    role: "",
+  },
+  theme: "light",
+  categories: [],
+  initialized: false,
+  initializedError: false,
+  // initializeApp,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUsername(state, action) {
-      state.username = action.payload;
+    setInitializedError(state, action) {
+      state.initializedError = action.payload;
     },
-    setIslogedIn(state, action) {
-      state.isLogedIn = action.payload;
+    setTheme(state, action) {
+      state.theme = action.payload;
+    },
+    setUser(state, action) {
+      state.user = action.payload;
+    },
+    setCategories(state, action) {
+      state.categories = action.payload;
+    },
+    setInitialized(state, action) {
+      state.initialized = action.payload;
     },
   },
 });
