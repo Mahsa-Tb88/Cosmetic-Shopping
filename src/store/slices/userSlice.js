@@ -14,7 +14,6 @@ const initialState = {
   categories: [],
   initialized: false,
   initializedError: false,
-  // initializeApp,
 };
 
 const userSlice = createSlice({

@@ -18,7 +18,7 @@ export default function Home() {
 
   async function fetchBlogs() {
     const result = await getBlogs(1, 1000);
-    
+
     setIsLoading(true);
     if (result.success) {
       setError(false);
@@ -509,48 +509,67 @@ export default function Home() {
       <section className="blog">
         <h2 className="blog-title mt-0  text-center mb-5 fs-1">Our Blog</h2>
         <div className="blog-container">
-          <Slider {...settingBlog} ref={sliderBlogRef}>
-            {blogs.map((blog) => {
-              return (
-                <Slide key={blog.id}>
-                  <div
-                    className="mx-3 mx-md-5"
-                    onClick={() => navigate("blogs")}
-                  >
-                    <div className=" blog-col border border-1 d-flex flex-column justify-content-center align-items-center">
-                      <div className="blog-overlay"></div>
-                      <div className="text-center blog-item">
-                        <div className="blog-img mt-0">
-                          <img src={SERVER_URL + blog.image} alt="blog-image" />
-                        </div>
-                        <div className="blog-body px-2 ">
-                          <h3 className="blog-body-title mt-5 mb-3 ">
-                            {blog.title}
-                          </h3>
-                          <div className="blog-info d-flex justify-content-around align-items-center">
-                            <span className="blog-info-detail">
-                              {blog.slug}
-                            </span>
-                            <span className="blog-info-dash"></span>
-                            <span className="blog-info-detail">
-                              Dr. Wade Warren
-                            </span>
-                            <span className="blog-info-dash"></span>
-                            <span className="blog-info-detail">
-                              Jan 20, 2021
-                            </span>
+          {error ? (
+            <div className="text-center">
+              <h2 className="error-msg">{error.message}</h2>
+              <button className="error-btn" onClick={fetchBlogs}>
+                Try Again
+              </button>
+            </div>
+          ) : isLoading ? (
+            <div className="d-flex justify-content-center align-items-center">
+              <h2 className="loading-msg">Is Loading...</h2>{" "}
+              <div className="spiner spinner-grow loading-msg ms-2"></div>
+            </div>
+          ) : (
+            <div>
+              <Slider {...settingBlog} ref={sliderBlogRef}>
+                {blogs.map((blog) => {
+                  return (
+                    <Slide key={blog.id}>
+                      <div
+                        className="mx-3 mx-md-5"
+                        onClick={() => navigate("blogs")}
+                      >
+                        <div className=" blog-col border border-1 d-flex flex-column justify-content-center align-items-center">
+                          <div className="blog-overlay"></div>
+                          <div className="text-center blog-item">
+                            <div className="blog-img mt-0">
+                              <img
+                                src={SERVER_URL + blog.image}
+                                alt="blog-image"
+                              />
+                            </div>
+                            <div className="blog-body px-2 ">
+                              <h3 className="blog-body-title mt-5 mb-3 ">
+                                {blog.title}
+                              </h3>
+                              <div className="blog-info d-flex justify-content-around align-items-center">
+                                <span className="blog-info-detail">
+                                  {blog.slug}
+                                </span>
+                                <span className="blog-info-dash"></span>
+                                <span className="blog-info-detail">
+                                  Dr. Wade Warren
+                                </span>
+                                <span className="blog-info-dash"></span>
+                                <span className="blog-info-detail">
+                                  Jan 20, 2021
+                                </span>
+                              </div>
+                              <p className="blog-desc">
+                                {blog.description.substring(0, 120)}
+                              </p>
+                            </div>
                           </div>
-                          <p className="blog-desc">
-                            {blog.description.substring(0, 120)}
-                          </p>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </Slide>
-              );
-            })}
-          </Slider>
+                    </Slide>
+                  );
+                })}
+              </Slider>
+            </div>
+          )}
         </div>
       </section>
       <section className="logo-group ">

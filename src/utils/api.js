@@ -85,6 +85,7 @@ export async function getProducts(
     }
   }
 }
+
 export async function getCategories(page, limit = 5) {
   try {
     const { data } = await axios.get("/categories", {

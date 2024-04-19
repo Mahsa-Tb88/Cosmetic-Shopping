@@ -16,6 +16,24 @@
   .col-overlay div {
     height: 100%;
   }
+  .loading-msg,
+  .error-msg {
+    color: #79043c;
+  }
+  .error-btn{
+    background-color: #a10550;
+    color: #fff;
+    border: 1px solid #a10550;
+    outline: none;
+    padding: 10px 20px;
+    z-index: 20;
+    position: relative;
+    font-size: 15px;
+
+  }
+  .error-btn:hover{
+    background-color: #79043c;
+  }
 
   .inner-col {
     background-color: #ffcece;
