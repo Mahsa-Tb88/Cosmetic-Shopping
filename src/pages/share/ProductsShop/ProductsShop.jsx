@@ -5,9 +5,9 @@ import ProductsList from "../../../components/share/ProductsList/ProductsList";
 import Pagination from "../../../components/share/Pagination/Pagination";
 import { Helmet } from "react-helmet";
 import { useSearchParams } from "react-router-dom";
-import shopReducer from "./shopReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../utils/api";
+import { shopActions } from "../../../store/slices/shopSlice";
 
 export default function ProductsShop() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,19 +22,16 @@ export default function ProductsShop() {
     const page = searchParams.get("page") || 1;
     const q = searchParams.get("q") || "";
     const limit = searchParams.get("limit") || 6;
-    const category = searchParams.get("category") || "all";
+    const category = searchParams.get("category") || "";
     const sort = searchParams.get("sort") || "id";
     const order = searchParams.get("order") || "desc";
     let delay = 10;
-
     if (shop.q != q) {
       delay = 2000;
     }
-
-    dispatch({
-      type: "setFilter",
-      payload: { page, limit, category, q, sort, order, delay },
-    });
+    dispatch(
+      shopActions.setFilter({ page, limit, category, q, sort, order, delay })
+    );
   }, [searchParams]);
 
   useEffect(() => {
@@ -52,16 +49,17 @@ export default function ProductsShop() {
       shop.sort,
       shop.order
     );
+    console.log(result);
     if (result.success) {
       setProducts(result.body);
       setTotalProducts(result.totalProducts.filtered);
-
       setError(false);
     } else {
       setError(result.message);
     }
     setIsLoading(false);
   }
+
   const numOfPage = Math.ceil(totalProducts / shop.limit);
 
   return (
@@ -70,6 +68,7 @@ export default function ProductsShop() {
         <title>Products</title>
       </Helmet>
       <h1 className="text-center title-page">Products</h1>
+
       <div className="row ">
         <div className="col col-md-3  p-0">
           <SidebarProducts />
@@ -90,7 +89,9 @@ export default function ProductsShop() {
           ) : (
             <div>
               <ProductsList products={products} />
-              <Pagination className="text-center" numOfPage={numOfPage} />
+              {numOfPage != 1 && (
+                <Pagination className="text-center" numOfPage={numOfPage} />
+              )}
             </div>
           )}
         </div>

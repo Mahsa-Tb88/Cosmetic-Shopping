@@ -15,13 +15,13 @@ const shopSlice = createSlice({
   initialState,
   reducers: {
     setFilter(state, action) {
-      state.page = action.payload;
-      state.q = action.payload;
-      state.limit = action.payload;
-      state.category = action.payload;
-      state.sort = action.payload;
-      state.order = action.payload;
-      state.delay = action.payload;
+      state.page = action.payload.page;
+      state.q = action.payload.q;
+      state.limit = action.payload.limit;
+      state.category = action.payload.category;
+      state.sort = action.payload.sort;
+      state.order = action.payload.order;
+      state.delay = action.payload.delay;
     },
   },
 });

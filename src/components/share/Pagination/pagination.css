@@ -9,4 +9,8 @@
     background-color: #79043c;
     color: #f8e9f0;
   }
+  .active{
+    background-color: #79043c ;
+    color: #f8e9f0 ;
+  }
 }
