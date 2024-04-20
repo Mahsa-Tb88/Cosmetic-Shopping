@@ -40,13 +40,13 @@ export default function SidebarProducts() {
   }
   function getSortType() {
     if (sort === "id" && order === "desc") {
-      return "1";
+      return "newest";
     } else if (sort === "id" && order === "asc") {
-      return "2";
+      return "oldest";
     } else if (sort === "price" && order === "desc") {
-      return "3";
+      return "expensive";
     } else if (sort === "price" && shopState.order === "asc") {
-      return "4";
+      return "cheapest";
     }
   }
 

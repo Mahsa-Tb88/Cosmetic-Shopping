@@ -10,8 +10,8 @@ export default function Pagination({ numOfPage }) {
   for (let i = 1; i <= numOfPage; i++) {
     pages.push(i);
   }
-  const currentPage = useSelector((state) => state.shop.page);
 
+  const currentPage = searchParams.get("page") || 1;
   function pageHandler(p) {
     const params = getNewSearchParams(searchParams, "page", p);
     setSearchParams(params);
@@ -21,9 +21,7 @@ export default function Pagination({ numOfPage }) {
       <ul className="pagination">
         <li className="page-item" onClick={() => pageHandler(1)}>
           <a
-            className={
-              `${1 == currentPage ? "disabled" : ""}` + " page-link "
-            }
+            className={`${1 == currentPage ? "disabled" : ""}` + " page-link "}
           >
             <MdKeyboardDoubleArrowLeft />
           </a>

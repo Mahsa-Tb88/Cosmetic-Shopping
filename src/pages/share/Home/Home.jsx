@@ -27,6 +27,7 @@ export default function Home() {
       setError({ message: result.error });
     }
     setIsLoading(false);
+    window.scrollTo({ top: 0, behaviar: "smoothly" });
   }
 
   const navigate = useNavigate();

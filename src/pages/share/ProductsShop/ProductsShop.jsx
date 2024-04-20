@@ -58,6 +58,7 @@ export default function ProductsShop() {
       setError(result.message);
     }
     setIsLoading(false);
+    window.scrollTo({ top: 0, behaviar: "smoothly" });
   }
 
   const numOfPage = Math.ceil(totalProducts / shop.limit);
