@@ -27,7 +27,7 @@ export default function App() {
         const { user } = body;
         user.isAdmin = user.role === "admin";
         user.isLoggedIn = true;
-        dispatch(setUser(user));
+        dispatch(userActions.setUser(user));
       }
       dispatch(userActions.setCategories(body.categories));
       dispatch(userActions.setInitialized(true));

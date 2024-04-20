@@ -42,6 +42,7 @@ export async function register(user) {
 export async function login(user) {
   try {
     const { data } = await axios.post("/auth/login", user);
+    console.log(data);
     return data;
   } catch (e) {
     if (!e.response) {

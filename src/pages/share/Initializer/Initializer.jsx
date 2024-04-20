@@ -4,7 +4,6 @@ import { initialize } from "../../../utils/api";
 
 export default function Initializer({ initializeApp }) {
   const initializedError = useSelector((state) => state.user.initializedError);
-  const dispatch = useDispatch();
 
   if (initializedError) {
     return (

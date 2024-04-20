@@ -11,8 +11,8 @@ import { RxCrossCircled } from "react-icons/rx";
 import { userActions } from "../../../store/slices/userSlice";
 
 export default function Header() {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const isAdmin = useSelector((state) => state.user.isAdmin);
+  const isLoggedIn = useSelector((state) => state.user.user.isLoggedIn);
+  const isAdmin = useSelector((state) => state.user.user.isAdmin);
   const theme = useSelector((state) => state.user.theme);
   const shops = useSelector((state) => state.cart.shops);
   const dispatch = useDispatch();
@@ -25,7 +25,10 @@ export default function Header() {
   ].join(" ");
 
   function shoppingCartHandler() {}
-  function signOutHandler() {}
+  function signOutHandler() {
+    dispatch(userActions.setLogout(false));
+    navigate("/");
+  }
   function themeHandler() {
     console.log(theme);
     if (theme == "light") {
@@ -169,7 +172,7 @@ export default function Header() {
             >
               Profile
             </Link>
-            {isAdmin == "admin" && (
+            {isAdmin  && (
               <Link
                 className="adminpanel-btn text-center btns py-1 px-1 px-md-3 me-2 me-md-3 link"
                 to="/admin"
