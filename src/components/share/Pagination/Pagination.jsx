@@ -2,7 +2,6 @@ import React from "react";
 import "./pagination.css";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
-import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 export default function Pagination({ numOfPage }) {
   const [searchParams, setSearchParams] = useSearchParams();

@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-// import "productForm.css";
+import "./productForm.css";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdOutlineError } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
+import noImage from "../../../assets/images/no-image.jpg";
+import { useSelector } from "react-redux";
+import { createProduct, updateProduct, uploadFile } from "../../../utils/api";
 
-export default function ProductForm() {
+export default function ProductForm({ product, type }) {
   const [selectedImage, setSelectedImage] = useState(noImage);
   const [imageChanged, setImageChanged] = useState(false);
   const [failMessage, setFailMessage] = useState("");
@@ -13,7 +16,26 @@ export default function ProductForm() {
   const navigate = useNavigate();
   const params = useParams();
 
-  const { register, handleSubmit, formState, setValue } = useForm({
+  useEffect(() => {
+    if (type === "edit") {
+      if (product.image) {
+        setSelectedImage(SERVER_URL + `${product.image}`);
+      } else {
+        setSelectedImage(noImage);
+      }
+    }
+    if (globalThis.newProduct) {
+      setSuccessMessage("New product created successfully");
+      globalThis.newProduct = false;
+      setTimeout(() => setSuccessMessage(""), 3000);
+    }
+  }, []);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setValue,
+  } = useForm({
     defaultValues: {
       title: product ? product.title : "",
       description: product ? product.description : "",
@@ -22,8 +44,58 @@ export default function ProductForm() {
       image: product?.image ? product.image : "",
     },
   });
-  const { error, isSubmitting } = formState;
+  const categories = useSelector((state) => state.user.categories);
 
+  async function onSubmit(data) {
+    setFailMessage("");
+    if (data.image?.length && imageChanged) {
+      const result = await uploadFile(data.image[0]);
+      if (result.success) {
+        data.image = result.body.url;
+      } else {
+        setFailMessage(result.message);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+    }
+
+    if (type == "new") {
+      const result = await createProduct(data);
+      if (result.success) {
+        globalThis.newProduct = true;
+        setSuccessMessage("Your Product Created Successfully");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setTimeout(() => {
+          navigate("/admin/products/" + result.body.id, { replace: true });
+        }, 1000);
+      } else {
+        setFailMessage(result.message);
+      }
+    } else {
+      const result = await updateProduct(params.id, data);
+      if (result.success) {
+        setSuccessMessage("Your Product Updated Successfully");
+        setImageChanged(false);
+        setTimeout(() => setSuccessMessage(""), 3000);
+      } else {
+        setFailMessage(result.message);
+      }
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  const imageField = { ...register("image") };
+  function handleImageSelect(e) {
+    imageField.onChange(e);
+    const file = e.target.files[0];
+    setImageChanged(true);
+    setSelectedImage(URL.createObjectURL(file));
+  }
+
+  function handleRemoveImage() {
+    setSelectedImage(noImage);
+    setValue("image", "");
+  }
   return (
     <form className="ms-3  mt-5 productform" onSubmit={handleSubmit(onSubmit)}>
       {failMessage && (
@@ -123,7 +195,7 @@ export default function ProductForm() {
               required: "Select the category",
             })}
           >
-            {appState.categories.map((c) => (
+            {categories.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.title}
               </option>
@@ -135,7 +207,6 @@ export default function ProductForm() {
         </div>
         <div className="d-flex  flex-column justify-content-center align-items-start mt-5 mb-4">
           <h3 className="mb-1 label fs-3">Image of Product</h3>
-
           <div className=" d-flex flex-column flex-md-row  justify-content-between align-items-center">
             <div className="me-4 d-flex justify-content-center align-items-center flex-column">
               <div>

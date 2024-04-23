@@ -182,9 +182,8 @@ export async function getUserById(id) {
 }
 
 export async function updateCategory(info, id) {
-  const config = getToken();
   try {
-    const { data } = await axios.put(`/categories/${id}`, info, config);
+    const { data } = await authAxios.put("/categories/" + id, info);
     return data;
   } catch (e) {
     if (!e.response) {
