@@ -39,7 +39,6 @@ export default function App() {
   }
 
   useEffect(() => {
-   
     document.documentElement.setAttribute("data-bs-theme", theme);
   }, [theme]);
 

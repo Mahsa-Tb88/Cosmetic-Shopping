@@ -28,8 +28,6 @@ export default function ProductsList({ products }) {
     dispatch(cartActions.setIncProduct(newShops));
   }
 
- 
-
   useEffect(() => {
     if (shops.length) {
       localStorage.shopping = JSON.stringify(shops);
@@ -45,7 +43,7 @@ export default function ProductsList({ products }) {
           <div className="col-12 col-md-6 col-lg-4 px-2 mb-5 pb-5" key={p.id}>
             <div className="h-100 px-3">
               <div className="d-felx flex-column justify-content-center align-items-baseline border border-1 ">
-                <Link className="link">
+                <Link className="link" to={"/product/" + `${p.id}`}>
                   <div className="img-product">
                     <img className="" src={SERVER_URL + p.image} />
                   </div>

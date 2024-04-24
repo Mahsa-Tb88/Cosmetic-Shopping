@@ -1,0 +1,24 @@
+.blog {
+  width: 85%;
+  margin: 10rem auto;
+  .blog-title {
+    margin-top: 2rem !important;
+  }
+  .blog-img {
+    margin: 2rem 0 1.5rem 0;
+    width: 100%;
+  }
+  .blog-img img {
+    width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .blog {
+    .blog-img {
+      width: 100%;
+    }
+    .blog-img img {
+      width: auto;
+    }
+  }
+}
