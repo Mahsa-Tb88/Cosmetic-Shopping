@@ -23,6 +23,7 @@ const userSlice = createSlice({
       state.initializedError = action.payload;
     },
     setTheme(state, action) {
+      localStorage.theme = action.payload;
       state.theme = action.payload;
     },
     setUser(state, action) {

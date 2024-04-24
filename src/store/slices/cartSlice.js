@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { shopActions } from "./shopSlice";
 
 const initialState = {
-  shops: [],
+  shops: localStorage.shopping ? JSON.parse(localStorage.shopping) : [],
   numOfShopping: 0,
 };
 

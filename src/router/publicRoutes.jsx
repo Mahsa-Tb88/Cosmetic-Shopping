@@ -4,6 +4,7 @@ import Profile from "../components/share/Profile/Profile";
 import PublicLayout from "../layout/PublicLayout";
 import AboutUs from "../pages/share/AboutUs/AboutUs";
 import Blogs from "../pages/share/Blogs/Blogs";
+import Cart from "../pages/share/Cart/Cart";
 import ContactUs from "../pages/share/ContactUs/ContactUs";
 import Home from "../pages/share/Home/Home";
 import Login from "../pages/share/Login/Login";
@@ -32,6 +33,7 @@ const publicRoutes = [
             children: [
               { index: true, element: <Dashboard /> },
               { path: "profile", element: <Profile /> },
+              { path: "cart", element: <Cart /> },
             ],
           },
           { path: "register", element: <Register /> },

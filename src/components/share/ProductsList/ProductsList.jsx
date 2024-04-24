@@ -28,11 +28,7 @@ export default function ProductsList({ products }) {
     dispatch(cartActions.setIncProduct(newShops));
   }
 
-  useEffect(() => {
-    if (localStorage.shopping) {
-      dispatch(cartActions.setShops(JSON.parse(localStorage.shopping)));
-    }
-  }, []);
+ 
 
   useEffect(() => {
     if (shops.length) {
@@ -127,15 +123,15 @@ function AddtoCart({ product }) {
         className="btn-trash d-flex justify-content-center align-items-center"
         onClick={() => deleteHandler(product)}
       >
-        <FaRegTrashAlt />
+        <FaRegTrashAlt size={17} />
       </div>
       <div className="d-flex justify-content-around align-items-center">
         <span className="btn-minus" onClick={() => decHandler(product)}>
-          <FaMinus />
+          <FaMinus size={15} />
         </span>
-        <span className="text-black mx-3">{findProduct.count}</span>
+        <span className="text-black mx-3 fs-4">{findProduct.count}</span>
         <span className="btn-plus" onClick={() => incHandler(product)}>
-          <FaPlus />
+          <FaPlus size={15} />
         </span>
       </div>
     </div>

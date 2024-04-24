@@ -24,13 +24,14 @@ export default function Header() {
     `${isOpenMenu ? "showMenu" : ""}`,
   ].join(" ");
 
-  function shoppingCartHandler() {}
+  function shoppingCartHandler() {
+    navigate("/panel/cart");
+  }
   function signOutHandler() {
     dispatch(userActions.setLogout(false));
     navigate("/");
   }
   function themeHandler() {
-    console.log(theme);
     if (theme == "light") {
       dispatch(userActions.setTheme("dark"));
     } else {
@@ -172,7 +173,7 @@ export default function Header() {
             >
               Profile
             </Link>
-            {isAdmin  && (
+            {isAdmin && (
               <Link
                 className="adminpanel-btn text-center btns py-1 px-1 px-md-3 me-2 me-md-3 link"
                 to="/admin"

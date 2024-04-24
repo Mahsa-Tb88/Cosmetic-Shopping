@@ -5,11 +5,13 @@ import { initialize } from "./utils/api";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "./store/slices/userSlice.js";
 import Initializer from "./pages/share/Initializer/Initializer.jsx";
+import { cartActions } from "./store/slices/cartSlice.js";
 
 export default function App() {
   const dispatch = useDispatch();
   const initializedError = useSelector((state) => state.user.initializedError);
   const initialized = useSelector((state) => state.user.initialized);
+  const theme = useSelector((state) => state.user.theme);
 
   useEffect(() => {
     const timeOut = setTimeout(initializeApp, 20);
@@ -35,6 +37,18 @@ export default function App() {
       dispatch(userActions.setInitializedError(result.message));
     }
   }
+
+  useEffect(() => {
+   
+    document.documentElement.setAttribute("data-bs-theme", theme);
+  }, [theme]);
+
+  function loadedFromLocalStorage() {
+    localStorage.shopping
+      ? dispatch(cartActions.setShops(Json.parse(localStorage.shopping)))
+      : "";
+  }
+  window.addEventListener("storage", loadedFromLocalStorage);
 
   if (initializedError || !initialized) {
     return <Initializer initializeApp={initializeApp} />;

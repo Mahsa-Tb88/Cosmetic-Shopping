@@ -17,8 +17,14 @@ export default function HeaderAdmin() {
   }
 
   function themeHandler() {
-    const newtheme = localStorage.theme == "dark " ? "light" : "dark";
-    dispatch(userActions.setTheme(newtheme));
+    // const newtheme = localStorage.theme == "dark " ? "light" : "dark";
+    let newTheme;
+    if (localStorage.theme == "dark") {
+      newTheme = "light";
+    } else {
+      newTheme = "dark";
+    }
+    dispatch(userActions.setTheme(newTheme));
   }
 
   return (
