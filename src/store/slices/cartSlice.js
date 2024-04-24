@@ -13,12 +13,15 @@ const cartSlice = createSlice({
       state.shops = action.payload;
     },
     setIncProduct(state, action) {
+      localStorage.shopping = JSON.stringify(action.payload);
       state.shops = action.payload;
     },
     setDecProduct(state, action) {
+      localStorage.shopping = JSON.stringify(action.payload);
       state.shops = action.payload;
     },
     setDeleteProduct(state, action) {
+      localStorage.shopping = JSON.stringify(action.payload);
       state.shops = action.payload;
     },
   },

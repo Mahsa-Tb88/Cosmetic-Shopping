@@ -7,6 +7,7 @@ import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../store/slices/cartSlice";
+import { Helmet } from "react-helmet";
 
 export default function Product() {
   const [selectedProduct, setSelectedProduct] = useState({});
@@ -21,12 +22,12 @@ export default function Product() {
   const cartProduct = shops.find((product) => product.id == productId);
 
   useEffect(() => {
-    document.title = "Product";
     const timeOut = setTimeout(fetchProdut, 20);
     return () => clearTimeout(timeOut);
   }, [params.id]);
 
   async function fetchProdut() {
+    setIsLoading(true);
     const result = await getProductById(productId);
     if (result.success) {
       setIsLoading(true);
@@ -78,9 +79,12 @@ export default function Product() {
 
   return (
     <div className="productPage d-flex justify-content-center align-items-center">
+      <Helmet>
+        <title>Product</title>
+      </Helmet>
       {isLoading ? (
-        <div className="text-center">
-          <p className="loading fs-3">Loading ... </p>
+        <div className="text-center vh-100 d-flex justify-content-center align-items-center">
+          <p className="loading fs-1">Loading ... </p>
           <p className="spinner spinner-grow fs-3"></p>
         </div>
       ) : loadingError ? (

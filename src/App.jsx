@@ -42,12 +42,19 @@ export default function App() {
     document.documentElement.setAttribute("data-bs-theme", theme);
   }, [theme]);
 
-  function loadedFromLocalStorage() {
+  function loadedShoppingFromLocalStorage() {
     localStorage.shopping
-      ? dispatch(cartActions.setShops(Json.parse(localStorage.shopping)))
+      ? dispatch(cartActions.setShops(JSON.parse(localStorage.shopping)))
       : "";
   }
-  window.addEventListener("storage", loadedFromLocalStorage);
+  function loadedThemeFromLocalStorage() {
+    console.log(localStorage.theme);
+    localStorage.theme
+      ? dispatch(userActions.setTheme(localStorage.theme))
+      : "";
+  }
+  window.addEventListener("storage", loadedShoppingFromLocalStorage);
+  window.addEventListener("storage", loadedThemeFromLocalStorage);
 
   if (initializedError || !initialized) {
     return <Initializer initializeApp={initializeApp} />;
