@@ -17,4 +17,82 @@
   .link {
     text-decoration: none;
   }
+
+  .btnAddToCart {
+    border: none;
+    width: 100%;
+  }
+  .link {
+    text-decoration: none;
+    color: #79043c;
+  }
+  .link:hover {
+    color: #5f0631;
+  }
+  .bg-addTocart {
+    background-color: #79043c;
+    width: 100%;
+    border: none;
+    color: #f8e9f0;
+    margin: 0;
+  }
+  .bg-addTocart:hover {
+    background-color: #f8e9f0;
+    color: #79043c;
+  }
+  .btn-add {
+    background-color: #f8e9f0;
+  }
+  .cardItem-titel {
+    margin-bottom: auto;
+  }
+  .product {
+    box-shadow: 0 1px 3px #0003;
+  }
+  .btn-trash {
+    color: #79043c;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 4px;
+  }
+  .btn-trash:hover {
+    background-color: #79043c;
+    color: #f8e9f0;
+    border: 1px solid #79043c;
+  }
+  .btn-minus {
+    background-color: rgb(199, 44, 44);
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f8e9f0;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .btn-minus:hover {
+    background-color: rgb(164, 22, 22);
+  }
+  .btn-plus {
+    background-color: rgb(43, 181, 86);
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f8e9f0;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .btn-plus:hover {
+    background-color: rgb(5, 161, 52);
+  }
+}
+
+[data-bs-theme="dark"] .productList {
+  .title-product {
+    color: #dee2e0 !important;
+  }
 }

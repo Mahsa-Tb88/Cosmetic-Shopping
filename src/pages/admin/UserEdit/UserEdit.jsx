@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getUserById, updateUser } from "../../../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import UserForm from "../../../components/admin/UserForm/UserForm";
+import "./userEdit.css";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../../store/slices/userSlice";
+import { Helmet } from "react-helmet";
+import { FaCheckCircle } from "react-icons/fa";
+import { MdOutlineError } from "react-icons/md";
 
 export default function UserEdit() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [user, setUser] = useState(null);
+  const [failMessage, setFailMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const params = useParams();
+  const navigate = useNavigate();
+  const idUser = useSelector((state) => state.user.user.id);
+  const username = useSelector((state) => state.user.user.username);
+  const dispatch = useDispatch();
+  const id = params.id;
+
+  useEffect(() => {
+    const timeOut = setTimeout(fetchUser, 20);
+    return () => clearTimeout(timeOut);
+  }, []);
 
   async function fetchUser() {
     setIsLoading(true);
@@ -27,23 +47,24 @@ export default function UserEdit() {
     if (result.success) {
       setFailMessage(false);
       setSuccessMessage("The user updated successfully");
-      if (+params.id === appState.user.id) {
+      if (+params.id === idUser) {
         const newUser = {
           isLoggedIn: true,
           isAdmin: data.role == "admin",
-          Username: appState.user.Username,
+          Username: username,
           firstname: data.firstname,
           lastname: data.lastname,
           role: data.role,
         };
-        appDispatch({ type: "setUser", payload: newUser });
+        dispatch(userActions.setUser(newUser));
       }
       setTimeout(() => {
         navigate("/admin/users");
-      }, 2000);
+      }, 4000);
     } else {
       setFailMessage(result.message);
     }
+    window.scrollTo({ top: 0, behavior: "instant" });
   }
   return (
     <div className="px-2 px-md-4 py-5 userEdit">
@@ -81,7 +102,7 @@ export default function UserEdit() {
             <title>Edit User</title>
           </Helmet>
           <h1>Edit User</h1>
-          <FormUser type="edit" onSubmit={submitHandler} user={user} />
+          <UserForm type="edit" onSubmit={submitHandler} user={user} />
         </div>
       )}
     </div>

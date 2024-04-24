@@ -49,7 +49,6 @@ export default function ProductsShop() {
       shop.sort,
       shop.order
     );
-    console.log(result);
     if (result.success) {
       setProducts(result.body);
       setTotalProducts(result.totalProducts.filtered);

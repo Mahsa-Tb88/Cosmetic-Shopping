@@ -1,9 +1,11 @@
 import App from "../App";
 import WelcomeAdmin from "../components/admin/WelcomeAdmin/WelcomeAdmin";
 import AdminLayout from "../layout/AdminLayout";
+import AddBlog from "../pages/admin/AddBlog/AddBlog";
 import AddCategory from "../pages/admin/AddCategory/AddCategory";
 import AddProduct from "../pages/admin/AddProduct/AddProduct";
 import AddUser from "../pages/admin/AddUser/AddUser";
+import BlogEdit from "../pages/admin/BlogEdit/BlogEdit";
 import Blogs from "../pages/admin/Blogs/Blogs";
 import Categories from "../pages/admin/Categories/Categories";
 import CategoryEdit from "../pages/admin/CategoryEdit/CategoryEdit";
@@ -29,9 +31,11 @@ const adminRoutes = [
           { path: "categories/edit/:id", element: <CategoryEdit /> },
           { path: "categories", element: <Categories /> },
           { path: "blogs", element: <Blogs /> },
+          { path: "blogs/new", element: <AddBlog /> },
+          { path: "blogs/edit/:id", element: <BlogEdit /> },
           { path: "users", element: <Users /> },
           { path: "users/new", element: <AddUser /> },
-          { path: "users/edit/id", element: <UserEdit /> },
+          { path: "users/edit/:id", element: <UserEdit /> },
         ],
       },
     ],
