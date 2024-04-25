@@ -22,6 +22,7 @@ export default function Product() {
   const cartProduct = shops.find((product) => product.id == productId);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
     const timeOut = setTimeout(fetchProdut, 20);
     return () => clearTimeout(timeOut);
   }, [params.id]);

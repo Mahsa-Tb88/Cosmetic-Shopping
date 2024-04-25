@@ -28,13 +28,7 @@ export default function ProductsList({ products }) {
     dispatch(cartActions.setIncProduct(newShops));
   }
 
-  // useEffect(() => {
-  //   if (shops.length) {
-  //     localStorage.shopping = JSON.stringify(shops);
-  //   } else {
-  //     delete localStorage.shopping;
-  //   }
-  // }, [shops]);
+ 
   return (
     <div className="row g productList ms-3">
       {products.map((p) => {
