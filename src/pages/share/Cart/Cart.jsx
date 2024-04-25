@@ -6,7 +6,11 @@ import { FaPlus } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../../../store/slices/cartSlice";
+import {
+  setDecHandler,
+  setDeleteHandler,
+  setIncHandler,
+} from "../../../store/slices/cartSlice";
 
 export default function Cart() {
   const shops = useSelector((state) => state.cart.shops);
@@ -36,42 +40,15 @@ export default function Cart() {
   });
 
   function removeItem(product) {
-    const newShops = shops.filter((p) => p.id !== product.id);
-    dispatch(cartActions.setDeleteProduct(newShops));
+    dispatch(setDeleteHandler(product));
   }
 
   function decNumOfItem(product) {
-    const findProduct = shops.find((p) => p.id == product.id);
-    let newShops;
-    if (findProduct.count > 1) {
-      newShops = shops.map((p) => {
-        if (p.id == findProduct.id) {
-          return { ...p, count: p.count - 1 };
-        } else {
-          return p;
-        }
-      });
-    } else {
-      newShops = shops.filter((p) => p.id != findProduct.id);
-    }
-    dispatch(cartActions.setDecProduct(newShops));
+    dispatch(setDecHandler(product));
   }
 
   function incNumOfItem(product) {
-    const findProduct = shops.find((p) => p.id == product.id);
-    let newShops;
-    if (findProduct) {
-      newShops = shops.map((p) => {
-        if (p.id == findProduct.id) {
-          return { ...p, count: p.count + 1 };
-        } else {
-          return p;
-        }
-      });
-    } else {
-      newShops = [...shops, { ...product, count: 1 }];
-    }
-    dispatch(cartActions.setIncProduct(newShops));
+    dispatch(setIncHandler(product));
   }
 
   return (

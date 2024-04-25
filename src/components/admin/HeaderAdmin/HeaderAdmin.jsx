@@ -4,6 +4,7 @@ import { userActions } from "../../../store/slices/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdMoon } from "react-icons/io";
 import { MdOutlineWbSunny } from "react-icons/md";
+import { cartActions } from "../../../store/slices/cartSlice";
 export default function HeaderAdmin() {
   const firstname = useSelector((state) => state.user.user.firstname);
   const lastname = useSelector((state) => state.user.user.lastname);
@@ -13,11 +14,12 @@ export default function HeaderAdmin() {
 
   function signOutHandler() {
     dispatch(userActions.setLogout(false));
+    delete localStorage.shopping;
+    dispatch(cartActions.setShops([]));
     navigate("/");
   }
 
   function themeHandler() {
-    // const newtheme = localStorage.theme == "dark " ? "light" : "dark";
     let newTheme;
     if (localStorage.theme == "dark") {
       newTheme = "light";

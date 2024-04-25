@@ -32,7 +32,7 @@ const adminRoutes = [
           { path: "categories", element: <Categories /> },
           { path: "blogs", element: <Blogs /> },
           { path: "blogs/new", element: <AddBlog /> },
-          { path: "blogs/edit/:id", element: <BlogEdit /> },
+          { path: "blogs/edit/:slug", element: <BlogEdit /> },
           { path: "users", element: <Users /> },
           { path: "users/new", element: <AddUser /> },
           { path: "users/edit/:id", element: <UserEdit /> },

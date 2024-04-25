@@ -53,7 +53,7 @@ export default function Blogs() {
                   <Link
                     key={blog.id}
                     className="col-12 col-md-6 col-lg-3 col-blog link"
-                    to={`${blog.id}`}
+                    to={`${blog.slug}`}
                   >
                     <div class="blog-item ">
                       <div class="blog-item-overlay"></div>

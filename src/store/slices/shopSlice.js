@@ -8,6 +8,8 @@ const initialState = {
   sort: "id",
   order: "desc",
   delay: 10,
+  products: [],
+  totalProducts: 0,
 };
 
 const shopSlice = createSlice({
@@ -23,6 +25,13 @@ const shopSlice = createSlice({
       state.order = action.payload.order;
       state.delay = action.payload.delay;
     },
+    setProducts(state, action) {
+      state.products = action.payload;
+    },
+    setTotalProducts(state, action) {
+      state.totalProducts = action.payload;
+    },
+    
   },
 });
 

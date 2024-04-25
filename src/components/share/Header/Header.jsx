@@ -9,6 +9,7 @@ import { IoMdMoon } from "react-icons/io";
 import { IoIosMenu } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
 import { userActions } from "../../../store/slices/userSlice";
+import { cartActions } from "../../../store/slices/cartSlice";
 
 export default function Header() {
   const isLoggedIn = useSelector((state) => state.user.user.isLoggedIn);
@@ -29,6 +30,8 @@ export default function Header() {
   }
   function signOutHandler() {
     dispatch(userActions.setLogout(false));
+    delete localStorage.shopping;
+    dispatch(cartActions.setShops([]));
     navigate("/");
   }
   function themeHandler() {

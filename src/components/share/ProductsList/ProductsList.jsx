@@ -5,32 +5,24 @@ import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../../../store/slices/cartSlice";
+import {
+  cartActions,
+  setDecHandler,
+  setDeleteHandler,
+  setIncHandler,
+} from "../../../store/slices/cartSlice";
 
-export default function ProductsList({ products }) {
+export default function ProductsList({}) {
   const shops = useSelector((state) => state.cart.shops);
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.shop.products);
 
   function incHandler(product) {
-    const findProduct = shops.find((p) => p.id == product.id);
-    let newShops;
-    if (findProduct) {
-      newShops = shops.map((p) => {
-        if (p.id == findProduct.id) {
-          return { ...p, count: p.count + 1 };
-        } else {
-          return p;
-        }
-      });
-    } else {
-      newShops = [...shops, { ...product, count: 1 }];
-    }
-    dispatch(cartActions.setIncProduct(newShops));
+    dispatch(setIncHandler(product));
   }
 
- 
   return (
-    <div className="row g productList ms-3">
+    <div className="row  productList ms-3">
       {products.map((p) => {
         const selectedItem = shops.find((item) => item.id == p.id);
         return (
@@ -69,45 +61,20 @@ export default function ProductsList({ products }) {
     </div>
   );
 }
+
 function AddtoCart({ product }) {
   const dispatch = useDispatch();
   const shops = useSelector((state) => state.cart.shops);
   const findProduct = shops.find((p) => p.id == product.id);
 
   function incHandler(product) {
-    let newShops;
-    if (findProduct) {
-      newShops = shops.map((p) => {
-        if (p.id == findProduct.id) {
-          return { ...p, count: p.count + 1 };
-        } else {
-          return p;
-        }
-      });
-    } else {
-      newShops = [...shops, { ...product, count: 1 }];
-    }
-    dispatch(cartActions.setIncProduct(newShops));
+    dispatch(setIncHandler(product));
   }
   function decHandler(product) {
-    const findProduct = shops.find((p) => p.id == product.id);
-    let newShops;
-    if (findProduct.count > 1) {
-      newShops = shops.map((p) => {
-        if (p.id == findProduct.id) {
-          return { ...p, count: p.count - 1 };
-        } else {
-          return p;
-        }
-      });
-    } else {
-      newShops = shops.filter((p) => p.id != findProduct.id);
-    }
-    dispatch(cartActions.setDecProduct(newShops));
+    dispatch(setDecHandler(product));
   }
   function deleteHandler(product) {
-    const newShops = shops.filter((p) => p.id !== product.id);
-    dispatch(cartActions.setDeleteProduct(newShops));
+    dispatch(setDeleteHandler(product));
   }
   return (
     <div className="px-2 py-3 d-flex justify-content-between align-items-center mt-auto btn-add">

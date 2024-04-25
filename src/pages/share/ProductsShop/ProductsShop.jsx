@@ -13,8 +13,6 @@ export default function ProductsShop() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState([]);
-  const [totalProducts, setTotalProducts] = useState(null);
   const shop = useSelector((state) => state.shop);
   const dispatch = useDispatch();
 
@@ -26,18 +24,20 @@ export default function ProductsShop() {
     const sort = searchParams.get("sort") || "id";
     const order = searchParams.get("order") || "desc";
     let delay = 10;
+
     if (shop.q != q) {
       delay = 2000;
     }
     dispatch(
       shopActions.setFilter({ page, limit, category, q, sort, order, delay })
     );
+    window.scrollTo({ top: 0, behaviar: "instant" });
   }, [searchParams]);
 
   useEffect(() => {
     const timeOut = setTimeout(fetchProducts, shop.delay);
     return () => clearTimeout(timeOut);
-  }, [shop]);
+  }, [shop.page, shop.q, shop.limit, shop.category, shop.sort, shop.order]);
 
   async function fetchProducts() {
     setIsLoading(true);
@@ -50,8 +50,8 @@ export default function ProductsShop() {
       shop.order
     );
     if (result.success) {
-      setProducts(result.body);
-      setTotalProducts(result.totalProducts.filtered);
+      dispatch(shopActions.setProducts(result.body));
+      dispatch(shopActions.setTotalProducts(result.totalProducts.filtered));
       setError(false);
     } else {
       setError(result.message);
@@ -60,7 +60,7 @@ export default function ProductsShop() {
     window.scrollTo({ top: 0, behaviar: "smoothly" });
   }
 
-  const numOfPage = Math.ceil(totalProducts / shop.limit);
+  const numOfPage = Math.ceil(shop.totalProducts / shop.limit);
 
   return (
     <div className="productsShop  container">
@@ -88,7 +88,7 @@ export default function ProductsShop() {
             </div>
           ) : (
             <div>
-              <ProductsList products={products} />
+              <ProductsList />
               {numOfPage != 1 && (
                 <Pagination className="text-center" numOfPage={numOfPage} />
               )}
