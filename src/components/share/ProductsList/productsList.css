@@ -14,14 +14,8 @@
     background-color: #f8e9f0;
     color: #79043c !important;
   }
-  .link {
-    text-decoration: none;
-  }
 
-  .btnAddToCart {
-    border: none;
-    width: 100%;
-  }
+
   .link {
     text-decoration: none;
     color: #79043c;
@@ -29,23 +23,11 @@
   .link:hover {
     color: #5f0631;
   }
-  .bg-addTocart {
-    background-color: #79043c;
-    width: 100%;
-    border: none;
-    color: #f8e9f0;
-    margin: 0;
-  }
-  .bg-addTocart:hover {
-    background-color: #f8e9f0;
-    color: #79043c;
-  }
+
   .btn-add {
     background-color: #f8e9f0;
   }
-  .cardItem-titel {
-    margin-bottom: auto;
-  }
+
   .product {
     box-shadow: 0 1px 3px #0003;
   }

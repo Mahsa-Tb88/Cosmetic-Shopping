@@ -12,7 +12,7 @@ import {
   setIncHandler,
 } from "../../../store/slices/cartSlice";
 
-export default function ProductsList({}) {
+export default function ProductsList() {
   const shops = useSelector((state) => state.cart.shops);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.shop.products);
@@ -26,25 +26,25 @@ export default function ProductsList({}) {
       {products.map((p) => {
         const selectedItem = shops.find((item) => item.id == p.id);
         return (
-          <div className="col-12 col-md-6 col-lg-4 px-2 mb-5 pb-5" key={p.id}>
-            <div className="h-100 px-3">
-              <div className="d-felx flex-column justify-content-center align-items-baseline border border-1 ">
-                <Link className="link" to={"/product/" + `${p.id}`}>
+          <div className=" col-12 col-md-6 col-lg-4 px-2 mb-5" key={p.id}>
+            <div className="px-3 h-100">
+              <div className="product d-flex flex-column justify-content-center align-items-baseline border border-1 h-100">
+                <Link className="link  " to={"/product/" + `${p.id}`}>
                   <div className="img-product">
                     <img className="" src={SERVER_URL + p.image} />
                   </div>
-                  <h3 className="pt-5 pb-3 mb-4 text-center title">
+                  <h3 className="pt-5 px-2 pb-3 mb-4 text-center title">
                     {p.title}
                   </h3>
                 </Link>
-                <div className="d-flex justify-content-between align-items-center py-3 px-2">
+                <div className="d-flex mt-auto justify-content-between align-items-center w-100   py-3 px-2">
                   <span className="fs-3">Price</span>
                   <span className="fs-3">${p.price}</span>
                 </div>
-                <div>
+                <div className="w-100">
                   {!selectedItem ? (
                     <button
-                      className="btn-addToCart text-white py-3 fs-4"
+                      className="btn-addToCart text-white py-4 fs-4"
                       onClick={() => incHandler(p)}
                     >
                       Add to Cart
