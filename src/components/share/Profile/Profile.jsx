@@ -24,7 +24,7 @@ export default function Profile() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
-  
+
   const { errors, isSubmitting } = formState;
 
   async function onSubmit(data) {
@@ -107,7 +107,7 @@ export default function Profile() {
             type="password"
             className="inputProfile fs-4 px-2 py-3 rounded-1 input"
             {...register("password", {
-              required: "You must enter your password",
+              disabled: true,
             })}
           />
           {errors.password && (
@@ -120,7 +120,7 @@ export default function Profile() {
             type="password"
             className="inputProfile px-2 py-3 fs-4 rounded-1 input"
             {...register("confirm", {
-              required: "You must enter the confirm password",
+              disabled: true,
               validate(value) {
                 if (watch("password") !== value) {
                   return "Your confirm password does not match the passwor";

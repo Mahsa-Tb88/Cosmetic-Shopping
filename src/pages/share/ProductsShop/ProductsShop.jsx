@@ -69,11 +69,11 @@ export default function ProductsShop() {
       </Helmet>
       <h1 className="text-center title-page">Products</h1>
 
-      <div className="row ">
-        <div className="col col-md-3  p-0">
+      <div className="row w-100">
+        <div className="col-12 col-md-3 mb-4 p-0">
           <SidebarProducts />
         </div>
-        <div className="col col-md-9  p-0">
+        <div className="col-12 col-md-9  p-0">
           {isLoading ? (
             <div className="d-flex justify-content-center align-items-center">
               <h2 className="msg me-3 fs-2">Is Loading...</h2>

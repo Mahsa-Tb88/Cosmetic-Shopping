@@ -57,20 +57,20 @@ export default function SidebarProducts() {
   }
 
   return (
-    <div className="sidebarProducts">
-      <div className="d-flex flex-column mb-5">
-        <label className="text-white mb-2 title">Search</label>
+    <div className="sidebarProducts ps-5 row ">
+      <div className="d-flex col-6 col-md-12 flex-column justify-content-center align-items-baseline mb-5">
+        <label className="text-white mb-2 title fs-3">Search</label>
         <input
-          className="input px-1 py-1"
+          className="input w-100 px-1 py-1"
           placeholder="search..."
           onChange={(e) => searchHandler(e.target.value)}
           value={search}
         />
       </div>
-      <div className="d-flex flex-column mb-5">
-        <label className="text-white mb-2 title">Categories</label>
+      <div className="d-flex col-6 col-md-12 flex-column justify-content-center align-items-baseline mb-5">
+        <label className="text-white mb-2 fs-3">Categories</label>
         <select
-          className="category px-1 py-2"
+          className="w-100 category px-1 py-2"
           onChange={(e) => categoryHandler(e.target.value)}
           value={category}
         >
@@ -84,10 +84,10 @@ export default function SidebarProducts() {
           })}
         </select>
       </div>
-      <div className="d-flex flex-column mb-5">
-        <label className="text-white mb-2 title">Sort</label>
+      <div className="d-flex col-6 col-md-12 flex-column justify-content-center align-items-baseline mb-5">
+        <label className="text-white mb-2 fs-3">Sort</label>
         <select
-          className="category px-1 py-2"
+          className="w-100 category  px-1 py-2"
           onChange={(e) => sortHandler(e.target.value)}
           value={getSortType()}
         >
@@ -97,10 +97,10 @@ export default function SidebarProducts() {
           <option value="cheapest"> cheapest</option>
         </select>
       </div>
-      <div className="d-flex flex-column mb-5">
-        <label className="text-white mb-2 title">Number oF Products</label>
+      <div className="d-flex col-6 col-md-12 flex-column justify-content-center align-items-baseline mb-5">
+        <label className="text-white mb-2 fs-3">Number oF Products</label>
         <select
-          className="category px-1 py-2"
+          className=" w-100 category px-1 py-2"
           onChange={(e) => numHandler(e.target.value)}
           value={limit}
         >

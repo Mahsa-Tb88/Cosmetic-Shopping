@@ -25,12 +25,14 @@ export default function App() {
     const result = await initialize();
     if (result.success) {
       const { body } = result;
+
       if (body.user) {
         const { user } = body;
         user.isAdmin = user.role === "admin";
         user.isLoggedIn = true;
         dispatch(userActions.setUser(user));
       }
+
       dispatch(userActions.setCategories(body.categories));
       dispatch(userActions.setInitialized(true));
     } else {

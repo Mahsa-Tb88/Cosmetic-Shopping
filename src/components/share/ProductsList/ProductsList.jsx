@@ -26,7 +26,7 @@ export default function ProductsList() {
       {products.map((p) => {
         const selectedItem = shops.find((item) => item.id == p.id);
         return (
-          <div className=" col-12 col-md-6 col-lg-4 px-2 mb-5" key={p.id}>
+          <div className=" col-12 col-md-6 col-lg-4 px-2 mb-5 " key={p.id}>
             <div className="px-3 h-100">
               <div className="product d-flex flex-column justify-content-center align-items-baseline border border-1 h-100">
                 <Link className="link  " to={"/product/" + `${p.id}`}>

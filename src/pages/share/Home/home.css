@@ -20,7 +20,7 @@
   .error-msg {
     color: #79043c;
   }
-  .error-btn{
+  .error-btn {
     background-color: #a10550;
     color: #fff;
     border: 1px solid #a10550;
@@ -29,9 +29,8 @@
     z-index: 20;
     position: relative;
     font-size: 15px;
-
   }
-  .error-btn:hover{
+  .error-btn:hover {
     background-color: #79043c;
   }
 
@@ -292,8 +291,9 @@
   }
   .newIn-title-mobile {
     margin-top: 4rem;
+    padding: 3rem 0 1rem 0;
     margin-bottom: 2rem;
-    font-size: 2rem;
+    font-size: 2.3rem;
   }
   .slide-one-body {
     width: 85%;

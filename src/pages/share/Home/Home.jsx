@@ -374,7 +374,7 @@ export default function Home() {
         <Slider {...settingNewIn} ref={sliderNewIn}>
           <Slide>
             <div className="slide-one text-center pb-0 pb-sm-5">
-              <h2 className="newIn-title-mobile  text-center text-white  mb-4">
+              <h2 className="newIn-title-mobile  text-center text-white  ">
                 New In
               </h2>
               <div className="slide-img  pb-5">
