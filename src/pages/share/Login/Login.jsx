@@ -48,6 +48,7 @@ export default function Login() {
       if (data.rememberme) {
         localStorage.token = token;
       } else {
+        delete localStorage.token;
         sessionStorage.token = token;
       }
       navigate("/panel");
